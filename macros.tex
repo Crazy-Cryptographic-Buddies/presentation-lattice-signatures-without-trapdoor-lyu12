@@ -1,3 +1,34 @@
+\newcommand{\tempcaption}{}% stores the caption
+\newenvironment{expt}[1]
+{
+	\gdef\tempcaption{#1}
+	\begin{figure}[ht!]
+		\centering
+		\begin{tabular}{|l|}
+			\hline
+		}
+		{ 
+			\hline
+		\end{tabular}
+		\caption{\tempcaption}
+	\end{figure}
+}
+
+\newcommand{\condprobability}[2]{\Pr\left[ \begin{array}{c}
+		#1
+	\end{array}\;\middle|\;\begin{array}{c}
+		#2
+	\end{array} \right]
+}
+
+\newcommand{\condset}[2]{\left\{ \begin{array}{c}
+		#1
+	\end{array}\;\middle|\;\begin{array}{c}
+		#2
+	\end{array} \right\}
+}
+
 \newcommand{\uniformly}{\stackrel{\$}{\leftarrow}}
 \newcommand{\elltwosis}{\ell_2\textsf{-SIS}}
 \newcommand{\sis}{\textsf{SIS}}
+\newcommand{\BigO}{\mathcal{O}}

@@ -1,3 +1,24 @@
 \begin{frame}{Rejection Sampling}
-	content...
+	Let $T \in \mathbb{R}_+$. Define $V := \condset{\mathbf{v} \in \mathbb{Z}^m}{\lVert\mathbf{v}\rVert_{2} \leq T}$.
+	
+	Let $\sigma = \omega(T\sqrt{m})$ and $h : V \to \mathbb{R}$ be a probability distribution.
+	
+	Then there exists a constant $M = \BigO(1)$ such that the following distributions have statistical distance $2^{-\omega(\log m)}/ M$. 
+	
+	\begin{columns}[c]
+		\column{0.45\linewidth}
+			\begin{expt}{Distribution $1$}
+				$\mathbf{v} \leftarrow h$,\\
+				$\mathbf{z} \leftarrow D_{\mathbf{v}, \sigma}^m$,\\
+				Output $(\mathbf{z}, \mathbf{v})$ with \\
+				\qquad probability $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{v},\sigma}}, 1\right\}$.\\
+			\end{expt}
+		\column{0.45\linewidth}
+			\begin{expt}{Distribution $2$}
+				$\mathbf{v} \leftarrow h$,\\
+				$\mathbf{z} \leftarrow D_{\mathbf{0}^m, \sigma}^m$,\\
+				Output $(\mathbf{z}, \mathbf{v})$ with \\
+				\qquad probability $\frac{1}{M}$.\\
+			\end{expt}
+	\end{columns}
 \end{frame}
