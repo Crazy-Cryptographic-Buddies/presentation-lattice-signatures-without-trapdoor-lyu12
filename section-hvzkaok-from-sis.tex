@@ -1,0 +1,17 @@
+\begin{frame}{An HVZKAoK from SIS}
+	\underline{Prover's secret:} $\mathbf{S} \in [-d, d]^{m\times k}$.\\
+	
+	\underline{Common Inputs:} $\mathbf{A} \in \mathbb{Z}_q^{n \times m}$ and $\mathbf{T} \in \mathbb{Z}_q^{n\times k}$.\\
+	
+	\underline{Prover's Goal:} Convincing verifier in ZK that $\mathbf{T} = \mathbf{A}\mathbf{S}$.\\
+	
+	\underline{Protocol execution:}
+	\begin{enumerate}
+		\item Prover samples $\mathbf{y} \uniformly D^m_\sigma$ and sends $\mathbf{t} = \mathbf{A}\mathbf{y}$.
+		\item Verifier sends $\mathbf{c}$ s.t $\mathbf{c} \in [-1, 1]^k$ and $\lVert \mathbf{c} \rVert_1 \leq \kappa$.
+		\item Prover sends $\mathbf{z} = \mathbf{S}\mathbf{c} + \mathbf{y}$ with probability $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{S}\mathbf{c},\sigma}(\mathbf{z})},1\right\}$.
+		\item[] Verifier accepts if $\lVert\mathbf{z}\rVert_2 \leq \eta\sigma\sqrt{m}$ and $\mathbf{A}\mathbf{z} - \mathbf{t} = \mathbf{T}\mathbf{c}$.
+	\end{enumerate}
+
+	\underline{Correctness:} $\mathbf{A}\mathbf{z} - \mathbf{t} = \mathbf{A}(\mathbf{S}\mathbf{c}+\mathbf{y}) - \mathbf{A}{y} = \mathbf{A}\mathbf{S}\mathbf{c} = \mathbf{T}\mathbf{c}$.
+\end{frame}
