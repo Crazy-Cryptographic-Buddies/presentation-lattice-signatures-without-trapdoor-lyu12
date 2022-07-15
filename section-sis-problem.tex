@@ -1,12 +1,23 @@
-\begin{frame}{SIS Problem}
+\begin{frame}{$\ell_2$-SIS Problem}
 	
-	\underline{$\elltwosis_{q, n, m, \beta}$ problem}
+	\underline{$\elltwosis_{q, n, m, \beta}$ problem.}
 	
-	Let $m, n, \beta, q \in \mathbb{Z}_+$. Given $\mathbf{A} \uniformly \mathbb{Z}_q^{n\times m}$, find $\mathbf{v} \in \mathbb{Z}^m \setminus \{\mathbf{0}^m\}$ s.t 
+	Let $q,n, m, \beta \in \mathbb{Z}_+$. Given $\mathbf{A} \uniformly \mathbb{Z}_q^{n\times m}$, find $\mathbf{v} \in \mathbb{Z}^m \setminus \{\mathbf{0}^m\}$ s.t 
 	\begin{equation*}
 		\begin{cases}
 			\mathbf{A}\cdot\mathbf{v} = \mathbf{0}^n,\\
 			\lVert\mathbf{v}\rVert_2 \leq \beta.
 		\end{cases}
 	\end{equation*}
+\end{frame}
+
+\begin{frame}{SIS Distribution and Problems}
+	\underline{Notation.} Define $[-d, d] = \{-d, -d + 1, \dots, d - 1, d\}$.
+	
+	\underline{$\sis_{q,n,m,d}$ distribution.} Let $q, n, m, d \in \mathbb{Z}_+$. Choose $\mathbf{A} \uniformly \mathbb{Z}_q^{n\times m}$ and $\mathbf{s} \in [-d, d]^m$, and output $(\mathbf{A}, \mathbf{A}\mathbf{s})$.
+	
+	\underline{$\sis_{q, n, m, d}$ search problem.} Given $(\mathbf{A}, \mathbf{t})$ from $\sis_{q, n, m, d}$ distribution, find $\mathbf{s} \in \mathbb{Z}^m$ s.t 
+	$\mathbf{A}\cdot\mathbf{s} = \mathbf{t}$ and $\mathbf{s} \in [-d, d]^m$.
+	
+	\underline{$\sis_{q, n, m, d}$ decision problem.} Decide whether $(\mathbf{A}, \mathbf{t})$ was sampled from $\sis_{q, n, m, d}$ distribution or uniformly from $\mathbb{Z}_q^{n\times m} \times \mathbb{Z}^n$.
 \end{frame}
