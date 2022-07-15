@@ -1,17 +1,49 @@
 \begin{frame}{An HVZKAoK from SIS}
-	\underline{Prover's secret:} $\mathbf{S} \in [-d, d]^{m\times k}$.\\
+	\underline{Signing key:} $\mathbf{S} \uniformly [-d, d]^{m\times k}$.\\
 	
-	\underline{Common Inputs:} $\mathbf{A} \in \mathbb{Z}_q^{n \times m}$ and $\mathbf{T} \in \mathbb{Z}_q^{n\times k}$.\\
+	\underline{Verification key:} $\mathbf{A} \uniformly \mathbb{Z}_q^{n \times m}$ and $\mathbf{T} = \mathbf{A}\mathbf{S}$.\\
 	
-	\underline{Prover's Goal:} Convincing verifier in ZK that $\mathbf{T} = \mathbf{A}\mathbf{S}$.\\
+	Let $D_H = \condset{\mathbf{c} \in \mathbb{Z}^k}{\mathbf{c} \in [-1, 1]^k \wedge \lVert\mathbf{c}\rVert_1 \leq \kappa}$.
 	
-	\underline{Protocol execution:}
+	Let $H:\{0,1\}^*\to D_H$ be a random oracle.
+	
+	\underline{Signing Algorithm:} On input message $\eta$,
 	\begin{enumerate}
-		\item Prover samples $\mathbf{y} \uniformly D^m_\sigma$ and sends $\mathbf{t} = \mathbf{A}\mathbf{y}$.
-		\item Verifier sends $\mathbf{c}$ s.t $\mathbf{c} \in [-1, 1]^k$ and $\lVert \mathbf{c} \rVert_1 \leq \kappa$.
-		\item Prover sends $\mathbf{z} = \mathbf{S}\mathbf{c} + \mathbf{y}$ with probability $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{S}\mathbf{c},\sigma}(\mathbf{z})},1\right\}$.
-		\item[] Verifier accepts if $\lVert\mathbf{z}\rVert_2 \leq \eta\sigma\sqrt{m}$ and $\mathbf{A}\mathbf{z} - \mathbf{t} = \mathbf{T}\mathbf{c}$.
+		\item Sample $\mathbf{y} \uniformly D^m_\sigma$ and compute $\mathbf{t} = \mathbf{A}\mathbf{y}$.
+		\item Take $\mathbf{c} \leftarrow H(\mathbf{t}, \eta)$.
+		\item Return $(\mathbf{z} = \mathbf{S}\mathbf{c} + \mathbf{y}, \mathbf{c})$ with probability $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{S}\mathbf{c},\sigma}(\mathbf{z})},1\right\}$.
 	\end{enumerate}
 
+	\underline{Verification.} Accept if $\lVert\mathbf{z}\rVert_2 \leq \eta\sigma\sqrt{m}$ and $H(\mathbf{A}\mathbf{z}- \mathbf{T}\mathbf{c}, \eta) = \mathbf{c}$.
+
 	\underline{Correctness:} $\mathbf{A}\mathbf{z} - \mathbf{t} = \mathbf{A}(\mathbf{S}\mathbf{c}+\mathbf{y}) - \mathbf{A}{y} = \mathbf{A}\mathbf{S}\mathbf{c} = \mathbf{T}\mathbf{c}$.
+\end{frame}
+
+\begin{frame}{How $\mathbf{z}$ does not leak $\mathbf{S}$}
+	\underline{Observations.}
+	\begin{itemize}
+		\item $\mathbf{S}\mathbf{c}$ is normal distribution centered at $\mathbf{S}\mathbf{c}$, standard deviation $\sigma$.
+		\item $\lVert\mathbf{S}\mathbf{c}\rVert_2 \leq d\kappa \sqrt{m}$.
+	\end{itemize}
+	
+	\underline{Hybrids.}
+	\begin{columns}[c]
+		\column{0.45\linewidth}
+		\begin{expt}{Hybrid 1}
+			$\mathbf{y} \uniformly D_\sigma^m$.\\
+			$\mathbf{c} \uniformly D_H$.\\
+			$\mathbf{z} := \mathbf{S}\mathbf{c} + \mathbf{y}$.\\
+			with prob. $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{S}\mathbf{c},\sigma}(\mathbf{z})},1\right\}$,\\
+			\qquad return $(\mathbf{z}, \mathbf{c})$, \\
+			\qquad program $H(\mathbf{A}\mathbf{z} - \mathbf{T}\mathbf{c}, \eta) = \mathbf{c}$.\\
+		\end{expt}
+		\column{0.45\linewidth}
+		\begin{expt}{Hybrid 2}
+			$\mathbf{y} \uniformly D_\sigma^m$.\\
+			$\mathbf{z} \uniformly D_\sigma^m$.\\
+			with prob. $1/M$,\\
+			\qquad return $(\mathbf{z}, \mathbf{c})$, \\
+			\qquad program $H(\mathbf{A}\mathbf{z} - \mathbf{T}\mathbf{c}, \eta) = \mathbf{c}$.\\
+		\end{expt}
+	\end{columns}
 \end{frame}
