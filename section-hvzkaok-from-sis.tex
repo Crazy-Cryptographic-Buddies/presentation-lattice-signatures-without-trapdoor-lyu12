@@ -9,7 +9,7 @@
 	
 	\underline{Signing Algorithm:} On input message $\mu$,
 	\begin{enumerate}
-		\item Sample $\mathbf{y} \uniformly D^m_\sigma$ and compute $\mathbf{t} = \mathbf{A}\mathbf{y}$.
+		\item Sample $\mathbf{y} \leftarrow D^m_\sigma$ and compute $\mathbf{t} = \mathbf{A}\mathbf{y}$.
 		\item Take $\mathbf{c} \leftarrow H(\mathbf{t}, \mu)$.
 		\item Return $(\mathbf{z} = \mathbf{S}\mathbf{c} + \mathbf{y}, \mathbf{c})$ with probability $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{S}\mathbf{c},\sigma}(\mathbf{z})},1\right\}$.
 	\end{enumerate}
@@ -30,7 +30,7 @@
 	\begin{columns}[c]
 		\column{0.45\linewidth}
 		\begin{expt}{Hybrid 1}
-			$\mathbf{y} \uniformly D_\sigma^m$.\\
+			$\mathbf{y} \leftarrow D_\sigma^m$.\\
 			$\mathbf{c} \uniformly D_H$.\\
 			$\mathbf{z} := \mathbf{S}\mathbf{c} + \mathbf{y}$.\\
 			with prob. $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{S}\mathbf{c},\sigma}(\mathbf{z})},1\right\}$,\\
@@ -39,8 +39,8 @@
 		\end{expt}
 		\column{0.45\linewidth}
 		\begin{expt}{Hybrid 2}
-			$\mathbf{y} \uniformly D_\sigma^m$.\\
-			$\mathbf{z} \uniformly D_\sigma^m$.\\
+			$\mathbf{c} \uniformly D_H$.\\
+			$\mathbf{z} \leftarrow D_\sigma^m$.\\
 			with prob. $1/M$,\\
 			\qquad return $(\mathbf{z}, \mathbf{c})$, \\
 			\qquad program $H(\mathbf{A}\mathbf{z} - \mathbf{T}\mathbf{c}, \mu) = \mathbf{c}$.\\
@@ -54,7 +54,7 @@
 	
 	Assume that $\Forger$ returns message $\eta$ and valid signature $(\mathbf{z}, \mathbf{c})$.
 	
-	With high probability, $\mathbf{c}$ is among $\mathbf{r}_j$'s output by $H$ $\Rightarrow$ found collision. 
+	With high probability, $\mathbf{c}$ is among $\mathbf{r}_j$'s output by $H$ $\Rightarrow$ applying general forking lemma and rewinding technique. 
 	
-	Otherwise, $H$ was programmed by $\Forger$.
+	Otherwise, $H$ was programmed by $\Forger$ $\Rightarrow$ found collision.
 \end{frame}
