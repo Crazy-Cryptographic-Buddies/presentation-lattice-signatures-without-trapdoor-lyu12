@@ -47,3 +47,14 @@
 		\end{expt}
 	\end{columns}
 \end{frame}
+\begin{frame}{Unforgeability} 
+	Forger $\Forger$ makes $h$ queries to signer in Hybrid 2 and, $s$ queries to $H$. 
+	
+	Run subroutine $\Algorithm$ to answer queries from $\Forger$ w.r.t Hybrid 2.
+	
+	Assume that $\Forger$ returns message $\eta$ and valid signature $(\mathbf{z}, \mathbf{c})$.
+	
+	With high probability, $\mathbf{c}$ is among $\mathbf{r}_j$'s output by $H$ $\Rightarrow$ found collision. 
+	
+	Otherwise, $H$ was programmed by $\Forger$.
+\end{frame}

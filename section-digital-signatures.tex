@@ -1,0 +1,12 @@
+\begin{frame}{Digital Signatures}
+	A digital signature scheme is a triple of $3$ PPT algorithms:
+	\begin{equation*}
+		(\Kgen, \Sign, \Verify).
+	\end{equation*}
+
+	A digital signature scheme is secure against PPT forger $\Forger$ if
+	\begin{itemize}
+		\item $\Forger$ can queries signatures of $q$ messages.
+		\item $\Forger$ returns new message with valid signature with negligible probability.
+	\end{itemize}
+\end{frame}
