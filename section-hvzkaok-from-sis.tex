@@ -7,14 +7,14 @@
 	
 	Let $H:\{0,1\}^*\to D_H$ be a random oracle.
 	
-	\underline{Signing Algorithm:} On input message $\eta$,
+	\underline{Signing Algorithm:} On input message $\mu$,
 	\begin{enumerate}
 		\item Sample $\mathbf{y} \uniformly D^m_\sigma$ and compute $\mathbf{t} = \mathbf{A}\mathbf{y}$.
-		\item Take $\mathbf{c} \leftarrow H(\mathbf{t}, \eta)$.
+		\item Take $\mathbf{c} \leftarrow H(\mathbf{t}, \mu)$.
 		\item Return $(\mathbf{z} = \mathbf{S}\mathbf{c} + \mathbf{y}, \mathbf{c})$ with probability $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{S}\mathbf{c},\sigma}(\mathbf{z})},1\right\}$.
 	\end{enumerate}
 
-	\underline{Verification.} Accept if $\lVert\mathbf{z}\rVert_2 \leq \eta\sigma\sqrt{m}$ and $H(\mathbf{A}\mathbf{z}- \mathbf{T}\mathbf{c}, \eta) = \mathbf{c}$.
+	\underline{Verification.} Accept if $\lVert\mathbf{z}\rVert_2 \leq \eta\sigma\sqrt{m}$ and $H(\mathbf{A}\mathbf{z}- \mathbf{T}\mathbf{c}, \mu) = \mathbf{c}$.
 
 	\underline{Correctness:} $\mathbf{A}\mathbf{z} - \mathbf{t} = \mathbf{A}(\mathbf{S}\mathbf{c}+\mathbf{y}) - \mathbf{A}{y} = \mathbf{A}\mathbf{S}\mathbf{c} = \mathbf{T}\mathbf{c}$.
 \end{frame}
@@ -35,7 +35,7 @@
 			$\mathbf{z} := \mathbf{S}\mathbf{c} + \mathbf{y}$.\\
 			with prob. $\min\left\{\frac{D^m_\sigma(\mathbf{z})}{MD^m_{\mathbf{S}\mathbf{c},\sigma}(\mathbf{z})},1\right\}$,\\
 			\qquad return $(\mathbf{z}, \mathbf{c})$, \\
-			\qquad program $H(\mathbf{A}\mathbf{z} - \mathbf{T}\mathbf{c}, \eta) = \mathbf{c}$.\\
+			\qquad program $H(\mathbf{A}\mathbf{z} - \mathbf{T}\mathbf{c}, \mu) = \mathbf{c}$.\\
 		\end{expt}
 		\column{0.45\linewidth}
 		\begin{expt}{Hybrid 2}
@@ -43,7 +43,7 @@
 			$\mathbf{z} \uniformly D_\sigma^m$.\\
 			with prob. $1/M$,\\
 			\qquad return $(\mathbf{z}, \mathbf{c})$, \\
-			\qquad program $H(\mathbf{A}\mathbf{z} - \mathbf{T}\mathbf{c}, \eta) = \mathbf{c}$.\\
+			\qquad program $H(\mathbf{A}\mathbf{z} - \mathbf{T}\mathbf{c}, \mu) = \mathbf{c}$.\\
 		\end{expt}
 	\end{columns}
 \end{frame}
